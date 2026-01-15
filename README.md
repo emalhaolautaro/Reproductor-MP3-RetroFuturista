@@ -28,6 +28,25 @@ A desktop music player built with **Electron.js**, inspired by Windows 7's "Aero
 
 ---
 
-## 🛠️ Instalación / Installation
+## 🛠️ Instalación y Creación del Ejecutable
 
-1. Clona el repositorio / *Clone the repo*
+Para instalar la aplicación y generar el archivo `.exe`:
+
+1.  **Clona el repositorio**:
+    ```bash
+    git clone https://github.com/emalhaolautaro/Reproductor-MP3-RetroFuturista.git
+    cd Reproductor-MP3-RetroFuturista
+    ```
+
+2.  **Instala las dependencias**:
+    ```bash
+    npm install
+    ```
+
+3.  **Genera el ejecutable**:
+    ```bash
+    npm run dist
+    ```
+
+4.  **¡Listo!**
+    En la carpeta `dist/` encontrarás el instalador (`.exe`) y la versión portable.
