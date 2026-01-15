@@ -2,6 +2,7 @@
   "name": "glass-music-player",
   "version": "1.0.0",
   "description": "Reproductor de música retro-futurista con diseño Aero Glass",
+  "repository": "https://github.com/emalhaolautaro/Reproductor-MP3-RetroFuturista.git",
   "main": "src/main/index.js",
   "scripts": {
     "start": "electron .",
