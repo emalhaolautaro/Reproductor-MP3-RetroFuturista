@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' file:; img-src 'self' data: file:;">
+    <title>Glass Music Player</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/glassmorphism.css">
+    <link rel="stylesheet" href="styles/controls.css">
+    <link rel="stylesheet" href="styles/equalizer.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Barra de título con controles MacOS -->
+        <header class="title-bar" id="titleBar">
+            <div class="window-controls">
+                <button class="control-btn close" id="closeBtn" title="Cerrar">
+                    <svg viewBox="0 0 12 12">
+                        <path d="M3.5 3.5l5 5m0-5l-5 5" />
+                    </svg>
+                </button>
+                <button class="control-btn minimize" id="minimizeBtn" title="Minimizar">
+                    <svg viewBox="0 0 12 12">
+                        <path d="M2 6h8" />
+                    </svg>
+                </button>
+                <button class="control-btn maximize" id="maximizeBtn" title="Maximizar">
+                    <svg viewBox="0 0 12 12">
+                        <rect x="2" y="2" width="8" height="8" rx="1" />
+                    </svg>
+                </button>
+            </div>
+            <div class="title-text">Glass Player</div>
+            <div class="title-spacer"></div>
+        </header>
+
+        <!-- Contenedor principal -->
+        <main class="main-content">
+            <!-- Panel del Visualizador -->
+            <section class="visualizer-panel glass-panel">
+                <canvas id="visualizerCanvas"></canvas>
+                <div class="now-playing" id="nowPlaying">
+                    <span class="track-title">Sin reproducción</span>
+                    <span class="track-artist"></span>
+                </div>
+            </section>
+
+            <!-- Panel lateral - Playlist -->
+            <aside class="playlist-panel glass-panel">
+                <div class="playlist-header">
+                    <h2>Playlist</h2>
+                    <div class="playlist-actions">
+                        <button class="action-btn" id="addFileBtn" title="Agregar archivos">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <ul class="playlist-items" id="playlistItems">
+                    <!-- Los items de la playlist se agregan dinámicamente -->
+                </ul>
+            </aside>
+        </main>
+
+        <!-- Panel Ecualizador Flotante (Movido fuera del footer) -->
+        <div class="equalizer-panel hidden" id="equalizerPanel">
+            <div class="equalizer-header">
+                <span>Ecualizador</span>
+                <button class="control-btn close" id="closeEqBtn" style="width: 20px; height: 20px;">
+                    <svg viewBox="0 0 12 12">
+                        <path d="M3.5 3.5l5 5m0-5l-5 5" />
+                    </svg>
+                </button>
+            </div>
+            <div class="equalizer-bands">
+                <div class="band-control">
+                    <div class="eq-slider-container">
+                        <input type="range" class="eq-slider-vertical" data-band="0" min="-12" max="12" value="0"
+                            step="1">
+                    </div>
+                    <span class="band-label">60</span>
+                    <span class="band-value">0</span>
+                </div>
+                <div class="band-control">
+                    <div class="eq-slider-container">
+                        <input type="range" class="eq-slider-vertical" data-band="1" min="-12" max="12" value="0"
+                            step="1">
+                    </div>
+                    <span class="band-label">310</span>
+                    <span class="band-value">0</span>
+                </div>
+                <div class="band-control">
+                    <div class="eq-slider-container">
+                        <input type="range" class="eq-slider-vertical" data-band="2" min="-12" max="12" value="0"
+                            step="1">
+                    </div>
+                    <span class="band-label">1k</span>
+                    <span class="band-value">0</span>
+                </div>
+                <div class="band-control">
+                    <div class="eq-slider-container">
+                        <input type="range" class="eq-slider-vertical" data-band="3" min="-12" max="12" value="0"
+                            step="1">
+                    </div>
+                    <span class="band-label">3k</span>
+                    <span class="band-value">0</span>
+                </div>
+                <div class="band-control">
+                    <div class="eq-slider-container">
+                        <input type="range" class="eq-slider-vertical" data-band="4" min="-12" max="12" value="0"
+                            step="1">
+                    </div>
+                    <span class="band-label">12k</span>
+                    <span class="band-value">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles del reproductor -->
+        <footer class="player-controls glass-panel">
+            <div class="progress-container">
+                <span class="time-current" id="timeCurrent">0:00</span>
+                <input type="range" class="progress-bar" id="progressBar" min="0" max="100" value="0">
+                <span class="time-total" id="timeTotal">0:00</span>
+            </div>
+            <div class="controls-main">
+                <button class="control-btn-player" id="prevBtn" title="Anterior">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                    </svg>
+                </button>
+                <button class="control-btn-player play-btn" id="playBtn" title="Reproducir">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                </button>
+                <button class="control-btn-player" id="nextBtn" title="Siguiente">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="controls-secondary">
+                <div class="volume-control">
+                    <svg class="volume-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                    </svg>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+                </div>
+                <!-- Boton Equalizer -->
+                <button class="control-btn-player small" id="eqBtn" title="Ecualizador" style="margin-left: 10px;">
+                    <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                        <path
+                            d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm-7-7h4v4H3v-4zm0-6h4v4H3V7zm0-6h4v4H3V1zm7 0h4v12h-4V1zm7 0h4v8h-4V1zm0 10h4v4h-4v-4zm0 6h4v4h-4v-4z" />
+                    </svg>
+                </button>
+            </div>
+
+
+        </footer>
+    </div>
+
+    <script src="modules/AudioModule.js"></script>
+    <script src="modules/VisualizerModule.js"></script>
+    <script src="modules/PlaylistModule.js"></script>
+    <script src="modules/UIModule.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

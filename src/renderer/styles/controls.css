@@ -1,0 +1,340 @@
+/* ============================================
+   CONTROLS.CSS - Controles Retro-Futuristas
+   Estilo Windows 7 Aero + Botones 3D Glossy
+   ============================================ */
+
+/* ============================================
+   BARRA DE TÍTULO
+   ============================================ */
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 var(--spacing-md);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-app-region: drag;
+    user-select: none;
+    position: relative;
+    z-index: 10;
+}
+
+.title-text {
+    flex: 1;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    pointer-events: none;
+}
+
+.title-spacer {
+    width: 70px;
+}
+
+/* ============================================
+   BOTONES DE VENTANA ESTILO MACOS
+   ============================================ */
+
+.window-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    -webkit-app-region: no-drag;
+}
+
+.control-btn {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    position: relative;
+
+    /* Efecto 3D glossy */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.control-btn svg {
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    stroke: rgba(0, 0, 0, 0.6);
+    stroke-width: 2;
+    fill: none;
+    transition: opacity var(--transition-fast);
+}
+
+.window-controls:hover .control-btn svg {
+    opacity: 1;
+}
+
+/* Botón cerrar - Rojo */
+.control-btn.close {
+    background: linear-gradient(145deg, #ff6b6b, #ff5f57);
+}
+
+.control-btn.close:hover {
+    background: linear-gradient(145deg, #ff4136, #e53935);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(255, 95, 87, 0.5);
+}
+
+/* Botón minimizar - Amarillo */
+.control-btn.minimize {
+    background: linear-gradient(145deg, #ffd93d, #febc2e);
+}
+
+.control-btn.minimize:hover {
+    background: linear-gradient(145deg, #f5a623, #e69500);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(254, 188, 46, 0.5);
+}
+
+/* Botón maximizar - Verde */
+.control-btn.maximize {
+    background: linear-gradient(145deg, #4ade80, #28c840);
+}
+
+.control-btn.maximize:hover {
+    background: linear-gradient(145deg, #1db954, #16a34a);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(40, 200, 64, 0.5);
+}
+
+/* ============================================
+   CONTROLES DEL REPRODUCTOR
+   ============================================ */
+
+.player-controls {
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+    margin: 0 var(--spacing-md) var(--spacing-md);
+    background: rgba(10, 15, 25, 0.85);
+}
+
+/* Barra de progreso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Tiempo estilo digital dot-matrix */
+.time-current,
+.time-total {
+    font-size: 0.8rem;
+    font-family: var(--font-digital);
+    color: var(--color-accent-cyan);
+    min-width: 45px;
+    text-align: center;
+    text-shadow: 0 0 8px var(--color-accent-cyan);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: height var(--transition-fast);
+
+    /* Borde biselado */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar:hover {
+    height: 8px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(145deg, var(--color-accent-cyan), #0891b2);
+    border-radius: 50%;
+    cursor: pointer;
+
+    /* Efecto 3D glossy */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 0 15px var(--color-accent-cyan),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+
+    transition: transform var(--transition-fast);
+}
+
+.progress-bar:hover::-webkit-slider-thumb {
+    transform: scale(1.1);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        0 0 25px var(--color-accent-cyan),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Controles principales */
+.controls-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+/* Botones del player - Estilo 3D glossy sphere */
+.control-btn-player {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    /* Efecto 3D biselado */
+    box-shadow:
+        3px 3px 10px rgba(0, 0, 0, 0.4),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.control-btn-player svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--color-accent-cyan);
+    filter: drop-shadow(0 0 5px var(--color-accent-cyan));
+}
+
+.control-btn-player:hover {
+    background: linear-gradient(145deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.05));
+    transform: scale(1.05);
+    box-shadow:
+        3px 3px 10px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(6, 182, 212, 0.3),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.control-btn-player:hover svg {
+    fill: #ffffff;
+}
+
+/* Botón Play principal - más grande y con efecto neón */
+.control-btn-player.play-btn {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(145deg, var(--color-accent-magenta), #c026d3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+        4px 4px 15px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(232, 121, 249, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.control-btn-player.play-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.control-btn-player.play-btn:hover {
+    background: linear-gradient(145deg, #f0abfc, var(--color-accent-magenta));
+    transform: scale(1.08);
+    box-shadow:
+        4px 4px 15px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(232, 121, 249, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Controles secundarios */
+.controls-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.volume-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-accent-cyan);
+    filter: drop-shadow(0 0 5px var(--color-accent-cyan));
+}
+
+.volume-slider {
+    width: 100px;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(145deg, var(--color-accent-cyan), #0891b2);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.4),
+        0 0 10px var(--color-accent-cyan);
+    transition: transform var(--transition-fast);
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.15);
+}
+
+/* ============================================
+   ESTADOS DE REPRODUCCIÓN
+   ============================================ */
+
+/* Por defecto: mostrar play, ocultar pause */
+.play-btn .play-icon {
+    display: block;
+}
+
+.play-btn .pause-icon {
+    display: none;
+}
+
+/* Cuando está reproduciendo: ocultar play, mostrar pause */
+.play-btn.playing .play-icon {
+    display: none;
+}
+
+.play-btn.playing .pause-icon {
+    display: block;
+}

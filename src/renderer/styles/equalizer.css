@@ -1,0 +1,111 @@
+/* Panel del ecualizador overlay */
+.equalizer-panel {
+    position: absolute;
+    bottom: 90px;
+    right: 20px;
+    width: 280px;
+    height: 180px;
+    background: rgba(15, 15, 25, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+    transform-origin: bottom right;
+}
+
+.equalizer-panel.hidden {
+    transform: scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    display: flex !important;
+    /* Override display:none to allow transition, handling visibility via opacity */
+    visibility: hidden;
+}
+
+.equalizer-panel:not(.hidden) {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.equalizer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.equalizer-bands {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    padding-top: var(--spacing-sm);
+}
+
+.band-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 30px;
+}
+
+/* Slider Vertical */
+.eq-slider {
+    appearance: slider-vertical;
+    -webkit-appearance: slider-vertical;
+    /* Standard non-standard webkit */
+    writing-mode: bt-lr;
+    /* IE */
+    width: 6px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Chrome/Edge Vertical Range Specifics fallback since proper styling is tricky */
+.eq-slider-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=range].eq-slider-vertical {
+    appearance: slider-vertical;
+    -webkit-appearance: slider-vertical;
+    /* WebKit */
+    writing-mode: bt-lr;
+    /* IE */
+    width: 8px;
+    height: 100%;
+    margin: 0 5px;
+}
+
+.band-label {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.band-value {
+    font-size: 0.7rem;
+    color: var(--color-accent-cyan);
+    font-family: var(--font-digital);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.band-control:hover .band-value {
+    opacity: 1;
+}

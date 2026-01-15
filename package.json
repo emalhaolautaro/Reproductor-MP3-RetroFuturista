@@ -1,0 +1,59 @@
+{
+  "name": "glass-music-player",
+  "version": "1.0.0",
+  "description": "Reproductor de música retro-futurista con diseño Aero Glass",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.lautaro.glassmusicplayer",
+    "productName": "Glass Music Player",
+    "files": [
+      "src/**/*",
+      "icon/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icon/logo.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "mac": {
+      "icon": "icon/logo.png",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "linux": {
+      "icon": "icon/logo.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Audio"
+    }
+  },
+  "keywords": [
+    "electron",
+    "music-player",
+    "glassmorphism",
+    "visualizer",
+    "aero-glass"
+  ],
+  "author": "Lautaro",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.4.0"
+  }
+}
