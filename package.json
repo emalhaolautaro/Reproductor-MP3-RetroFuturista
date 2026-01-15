@@ -30,6 +30,7 @@
     },
     "mac": {
       "icon": "icon/logo.png",
+      "identity": null,
       "target": [
         "dmg",
         "zip"
